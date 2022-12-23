@@ -1,0 +1,14 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+substitutions:
+  _NODE_VERSION: 16.19.0
+steps:
+  - id: "lint"
+    # run:    npx prettier --check './**/*.{js,ts,json,yaml,yml}'
+    # patch:  npx prettier --write './**/*.{js,ts,json,yaml,yml}'
+    name: node:$_NODE_VERSION
+    entrypoint: npx
+    args:
+      - prettier
+      - "--check"
+      - "./**/*.{js,ts,json,yaml,yml}"
