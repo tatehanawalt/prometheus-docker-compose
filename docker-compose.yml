@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    command: 
+      - "--config.file=/etc/prometheus/prometheus.yaml"
+      - "--storage.tsdb.path=/etc/prometheus/tsdb"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
+      - "--enable-feature=memory-snapshot-on-shutdown"
+      - "--web.enable-admin-api"
+    networks:
+      - my-shared-network
+    ports:
+      - 9090:9090
+    volumes:
+      - ./shared_volume_dir/prometheus:/etc/prometheus
+  prometheus-push-gateway:
+    container_name: prometheus-push-gateway
+    image: prom/pushgateway
+    networks:
+      - my-shared-network
+    ports:
+      - 9091:9091
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    networks:
+      - my-shared-network
+    ports:
+      - 3000:3000
+    volumes:
+      - ./shared_volume_dir/grafana:/var/lib/grafana
+networks:
+  my-shared-network: {}

@@ -1,0 +1,22 @@
+global:
+  # By default, scrape targets every 15 seconds.
+  scrape_interval: 15s
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+    monitor: codelab-monitor
+
+scrape_configs:
+  - job_name: prometheus
+    # label `job=<job_name>` to any timeseries scraped from this config.
+    static_configs:
+      - targets:
+          - "localhost:9090"
+  - job_name: pushed-metrics
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+    honor_labels: true
+    static_configs:
+      - targets:
+          - "prometheus-push-gateway:9091"
