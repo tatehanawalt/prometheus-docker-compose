@@ -3,7 +3,7 @@ services:
   prometheus:
     container_name: prometheus
     image: prom/prometheus
-    command: 
+    command:
       - "--config.file=/etc/prometheus/prometheus.yaml"
       - "--storage.tsdb.path=/etc/prometheus/tsdb"
       - "--web.console.libraries=/usr/share/prometheus/console_libraries"

@@ -11,6 +11,8 @@ https://hub.docker.com/r/prom/prometheus
 docker-compose up -d --remove-orphans
 ```
 
+#### At this point, navigate to Prometheus at [](http://localhost:9090), and Grafana at [](http://localhost:3000)
+
 enter the following into http://localhost:9090/graph
 ```shell
 prometheus_target_interval_length_seconds
